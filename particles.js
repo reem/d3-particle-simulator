@@ -1,19 +1,14 @@
 // Make the linter happy.
 var d3 = d3;
 var Circle = Circle;
-var resumeForce = resumeForce;
-var updateForce = updateForce;
-var resetForce = resetForce;
-var onTick = onTick;
-var collide = collide;
 // End of linter.
 
 var between = function (min, max) {
   return Math.floor(Math.random()*(max-min+1)+min);
 };
 
-var createParticles = function (numParticles,
-  sizeRange, locationXRange, locationYRange) {
+var createParticles = function (numParticles, sizeRange,
+    locationXRange, locationYRange) {
   return d3.range(numParticles).map(function () {
     return new Circle(
       between.apply(null, locationXRange || [10, window.innerWidth - 10]),
