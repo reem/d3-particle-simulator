@@ -2,16 +2,39 @@
 <html>
 <head>
   <title>Gravity in D3</title>
-  <style type="text/css" src="styles.css"></style>
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="lib/dragdealer.css"/>
+  <style>
+  * {
+    font-family: sans-serif;
+  }
+  </style>
+
+  <!-- Libraries -->
   <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
   <script type="text/javascript" src="node_modules/d3/d3.min.js"></script>
+  <script type="text/javascript" src="lib/dragdealer.js"></script>
+  <script type="text/javascript" src="lib/jquery.js"></script>
+
+  <!-- Scripts -->
   <script type="text/javascript" src="vector.js"></script>
   <script type="text/javascript" src="circle.js"></script>
   <script type="text/javascript" src="force.js"></script>
   <script type="text/javascript" src="particles.js"></script>
 </head>
 <body>
+  <div id="gravity" class="dragdealer">
+    <div class="handle green-bar bar">gravity</div>
+  </div>
+  <div id="charge" class="dragdealer">
+    <div class="handle red-bar bar">charge</div>
+  </div>
+    <div id="particles" class="dragdealer">
+    <div class="handle blue-bar bar">particles</div>
+  </div>
   <div id="main"></div>
+
+  <!-- Entry point -->
   <script type="text/javascript" src="init.js"></script>
 </body>
 </html>
