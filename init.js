@@ -10,16 +10,25 @@ var collide = collide;
 var resetForce;
 var updateRoot = updateRoot;
 var root = root;
+var $ = $;
+var Dragdealer = Dragdealer;
 // End of linter.
 
 var gravityStrength = 0.8;
-var chargeStrength = function (d, i) { return i ? (Math.random() - 0.6) * 200 : -4000; };
+var chargeStrength = 0.2;
+var chargeFunction = function (d, i) {
+  return i ? (Math.random() - 0.8) * chargeStrength * 1000 : -4000;
+};
 
 var svg = d3.select("#main").append("svg:svg")
   .attr("width", window.innerWidth)
   .attr("height", window.innerHeight);
 
-(function () {
+$(document).ready(function () {
+  var gravitySlider = new Dragdealer("gravity", {x: gravityStrength});
+  var chargeSlider = new Dragdealer("charge", {x: chargeStrength});
+  var particleSlider = new Dragdealer("particles", {x: 0.5});
+
   updateParticles();
   updateRoot();
 
@@ -27,7 +36,7 @@ var svg = d3.select("#main").append("svg:svg")
     var particles = getParticles();
     var quadTree = d3.geom.quadtree(particles);
 
-    var n = getParticles().lenght;
+    var n = getParticles().length;
     for (var i = 1; i < n; i++) {
       quadTree.visit(collide(particles[i]));
     }
@@ -45,7 +54,10 @@ var svg = d3.select("#main").append("svg:svg")
   });
 
   setInterval(function () {
-    updateForce(getParticles(), gravityStrength, chargeStrength);
+    gravityStrength = gravitySlider.getValue()[0];
+    chargeStrength = chargeSlider.getValue()[0] * 10;
+
+    updateForce(getParticles(), gravityStrength, chargeFunction);
     resetForce();
   }, 100);
-}());
+});
