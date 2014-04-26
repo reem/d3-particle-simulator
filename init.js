@@ -8,22 +8,20 @@ var resumeForce = resumeForce;
 var updateForce = updateForce;
 var collide = collide;
 var resetForce;
+var updateRoot = updateRoot;
+var root = root;
 // End of linter.
 
 var gravityStrength = 0.8;
 var chargeStrength = function (d, i) { return i ? (Math.random() - 0.6) * 200 : -4000; };
 
+var svg = d3.select("#main").append("svg:svg")
+  .attr("width", window.innerWidth)
+  .attr("height", window.innerHeight);
+
 (function () {
-
-  var root = getParticles()[0];
-  root.r = 0;
-  root.fixed = true;
-
-  var svg = d3.select("#main").append("svg:svg")
-    .attr("width", window.innerWidth)
-    .attr("height", window.innerHeight);
-
-  updateParticles(svg);
+  updateParticles();
+  updateRoot();
 
   onTick(function () {
     var particles = getParticles();
@@ -49,5 +47,5 @@ var chargeStrength = function (d, i) { return i ? (Math.random() - 0.6) * 200 : 
   setInterval(function () {
     updateForce(getParticles(), gravityStrength, chargeStrength);
     resetForce();
-  }, 50);
+  }, 100);
 }());
