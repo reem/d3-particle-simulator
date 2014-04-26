@@ -1,12 +1,21 @@
+// Make the linter happy.
+var d3 = d3;
+var Circle = Circle;
+var getParticles = getParticles;
+var updateParticles = updateParticles;
+var onTick = onTick;
+var resumeForce = resumeForce;
+var updateForce = updateForce;
+var collide = collide;
+var resetForce;
+// End of linter.
+
 var gravityStrength = 0.8;
-var chargeStrength = function (d, i) { return i ? (Math.random() - 0.6) * 400 : -4000};
-var numParticles = 2000;
+var chargeStrength = function (d, i) { return i ? (Math.random() - 0.6) * 200 : -4000; };
 
 (function () {
-  var particles = createParticles(2000);
-  var color = d3.scale.category10();
 
-  var root = particles[0];
+  var root = getParticles()[0];
   root.r = 0;
   root.fixed = true;
 
@@ -14,10 +23,14 @@ var numParticles = 2000;
     .attr("width", window.innerWidth)
     .attr("height", window.innerHeight);
 
+  updateParticles(svg);
+
   onTick(function () {
+    var particles = getParticles();
     var quadTree = d3.geom.quadtree(particles);
 
-    for (var i = 1; i < particles.length; i++) {
+    var n = getParticles().lenght;
+    for (var i = 1; i < n; i++) {
       quadTree.visit(collide(particles[i]));
     }
 
@@ -33,10 +46,8 @@ var numParticles = 2000;
     resumeForce();
   });
 
-  updateParticles(svg, particles, color);
-
   setInterval(function () {
-    updateForce(particles);
+    updateForce(getParticles(), gravityStrength, chargeStrength);
     resetForce();
   }, 50);
 }());
