@@ -4,7 +4,7 @@ var Circle = Circle;
 var svg = svg;
 // End of linter.
 
-var numParticles = 2000;
+var numParticles = 0.5;
 var createParticles, updateParticles, getParticles, newParticles, root, updateRoot;
 
 var between = function (min, max) {
@@ -12,13 +12,19 @@ var between = function (min, max) {
 };
 
 (function () {
+  var createParticle = function (sizeRange, locationXRange,
+      locationYRange) {
+    return new Circle(
+        between.apply(null, locationXRange || [10, window.innerWidth - 10]),
+        between.apply(null, locationYRange || [10, window.innerHeight - 10]),
+        between.apply(null, sizeRange || [4, 8]));
+  };
+
   createParticles = function (numParticles, sizeRange,
       locationXRange, locationYRange) {
     return d3.range(numParticles).map(function () {
-      return new Circle(
-        between.apply(null, locationXRange || [10, window.innerWidth - 10]),
-        between.apply(null, locationYRange || [10, window.innerHeight - 10]),
-        between.apply(null, sizeRange || [2, 4]));
+      return createParticle(sizeRange, locationXRange,
+        locationYRange);
     });
   };
 
@@ -42,15 +48,22 @@ var between = function (min, max) {
     root.fixed = true;
   };
 
-  var particles = createParticles(numParticles);
+  var particles = createParticles(numParticles * 2000);
   var color = d3.scale.category10();
 
   getParticles = function () {
     return particles;
   };
 
-  newParticles = function () {
-    particles = createParticles.apply(null, arguments);
+  newParticles = function (oldParticles, newParticles) {
+    while (newParticles > oldParticles) {
+      particles.push(createParticle());
+      newParticles -= 1;
+    }
+    while (newParticles < oldParticles) {
+      particles.pop();
+      oldParticles -= 1;
+    }
     updateParticles();
     updateRoot();
   };

@@ -12,12 +12,14 @@ var updateRoot = updateRoot;
 var root = root;
 var $ = $;
 var Dragdealer = Dragdealer;
+var newParticles = newParticles;
+var numParticles = numParticles;
 // End of linter.
 
-var gravityStrength = 0.8;
+var gravityStrength = 0.1;
 var chargeStrength = 0.2;
 var chargeFunction = function (d, i) {
-  return i ? (Math.random() - 0.8) * chargeStrength * 1000 : -4000;
+  return i ? (Math.random() - 0.8) * chargeStrength * 200 : -4000;
 };
 
 var svg = d3.select("#main").append("svg:svg")
@@ -27,7 +29,7 @@ var svg = d3.select("#main").append("svg:svg")
 $(document).ready(function () {
   var gravitySlider = new Dragdealer("gravity", {x: gravityStrength});
   var chargeSlider = new Dragdealer("charge", {x: chargeStrength});
-  var particleSlider = new Dragdealer("particles", {x: 0.5});
+  var particleSlider = new Dragdealer("particles", {x: numParticles});
 
   updateParticles();
   updateRoot();
@@ -54,9 +56,13 @@ $(document).ready(function () {
   });
 
   setInterval(function () {
-    gravityStrength = gravitySlider.getValue()[0];
+    gravityStrength = gravitySlider.getValue()[0] * 5 + 0.00001;
     chargeStrength = chargeSlider.getValue()[0] * 10;
 
+    var oldParticles = numParticles;
+    numParticles = particleSlider.getValue()[0] * 2500;
+
+    newParticles(oldParticles, numParticles);
     updateForce(getParticles(), gravityStrength, chargeFunction);
     resetForce();
   }, 100);
