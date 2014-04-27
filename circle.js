@@ -1,3 +1,8 @@
+var Vector = function (x, y) {
+  this.x = x;
+  this.y = y;
+};
+
 var Circle = function (x, y, r) {
   Vector.call(this, x, y);
   this.r = r;
