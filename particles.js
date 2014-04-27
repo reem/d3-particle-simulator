@@ -55,14 +55,13 @@ var between = function (min, max) {
     return particles;
   };
 
-  newParticles = function (oldParticles, newParticles) {
-    while (newParticles > oldParticles) {
+  newParticles = function (newParticles) {
+    while (newParticles > particles.length) {
       particles.push(createParticle());
       newParticles -= 1;
     }
-    while (newParticles < oldParticles) {
+    while (newParticles < particles.length) {
       particles.pop();
-      oldParticles -= 1;
     }
     updateParticles();
     updateRoot();

@@ -60,7 +60,7 @@ $(document).ready(function () {
     chargeStrength = chargeSlider.getValue()[0] * 10;
 
     var oldParticles = numParticles;
-    numParticles = particleSlider.getValue()[0] * 2500;
+    numParticles = Math.floor(particleSlider.getValue()[0] * 2000);
 
     newParticles(oldParticles, numParticles);
     updateForce(getParticles(), gravityStrength, chargeFunction);
