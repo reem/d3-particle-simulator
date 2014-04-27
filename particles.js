@@ -59,12 +59,12 @@ var between = function (min, max) {
   };
 
   // Updates the number of particles.
-  newParticles = function (newParticles) {
-    while (newParticles > particles.length) {
+  newParticles = function (newNum) {
+    while (newNum > particles.length) {
       particles.push(createParticle());
-      newParticles -= 1;
+      newNum -= 1;
     }
-    while (newParticles < particles.length) {
+    while (newNum < particles.length) {
       particles.pop();
     }
     updateParticles();

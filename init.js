@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     // Set the number of particles and update them.
     numParticles = particleSlider.getValue()[0] * 2000;
-    newParticles();
+    newParticles(numParticles);
 
     // Update our force with the new values.
     updateForce(getParticles(), gravityStrength, chargeFunction);
