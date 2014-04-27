@@ -1,11 +1,15 @@
+// Global number of particles, scaled down for display on a slider.
 var numParticles = 0.5;
+// Exposed functions.
 var createParticles, updateParticles, getParticles, newParticles, root, updateRoot;
 
+// Utility function that gets an integer between two values.
 var between = function (min, max) {
   return Math.floor(Math.random()*(max-min+1)+min);
 };
 
 (function () {
+  // Create a single particle.
   var createParticle = function (sizeRange, locationXRange,
       locationYRange) {
     return new Circle(
@@ -14,6 +18,8 @@ var between = function (min, max) {
         between.apply(null, sizeRange || [4, 8]));
   };
 
+  // Exposed function.
+  // Creates many new particles - usually just called once.
   createParticles = function (numParticles, sizeRange,
       locationXRange, locationYRange) {
     return d3.range(numParticles).map(function () {
@@ -22,6 +28,7 @@ var between = function (min, max) {
     });
   };
 
+  // D3 Update function for particles.
   updateParticles = function () {
     svg.selectAll("circle")
         .data(particles.slice(1))
@@ -36,12 +43,14 @@ var between = function (min, max) {
       .exit().remove();
   };
 
+  // Update the root node to match new particles.
   updateRoot = function () {
     root = getParticles()[0];
     root.r = 0;
     root.fixed = true;
   };
 
+  // Initialize particles.
   var particles = createParticles(numParticles * 2000);
   var color = d3.scale.category10();
 
@@ -49,6 +58,7 @@ var between = function (min, max) {
     return particles;
   };
 
+  // Updates the number of particles.
   newParticles = function (newParticles) {
     while (newParticles > particles.length) {
       particles.push(createParticle());
