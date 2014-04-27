@@ -8,6 +8,15 @@ collider demo. This implementation provides many exciting features including:
 * Interaction with the mouse
 * User-control of these values through dynamic sliders
 
+##Explosion:
+![](/../images/explosion.png?raw=true)
+
+##Peace:
+![](/../images/peace.png?raw=true)
+
+##Action:
+![](/../images/action.png?raw=true)
+
 To run, just clone this repo, `npm install d3`, and open `index.html` for fun!
 
 This was originally a project from [Hack Reactor's](http://hackreactor.com) curriculum. 
