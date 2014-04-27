@@ -1,6 +1,3 @@
-var updateForce, resetForce, resumeForce, onTick;
-var d3 = d3;
-
 (function () {
   var force = d3.layout.force();
 

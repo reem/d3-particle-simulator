@@ -1,21 +1,3 @@
-// Make the linter happy.
-var d3 = d3;
-var Circle = Circle;
-var getParticles = getParticles;
-var updateParticles = updateParticles;
-var onTick = onTick;
-var resumeForce = resumeForce;
-var updateForce = updateForce;
-var collide = collide;
-var resetForce;
-var updateRoot = updateRoot;
-var root = root;
-var $ = $;
-var Dragdealer = Dragdealer;
-var newParticles = newParticles;
-var numParticles = numParticles;
-// End of linter.
-
 var gravityStrength = 0.2;
 var chargeStrength = 0.4;
 var chargeFunction = function (d, i) {

@@ -1,9 +1,3 @@
-// Make the linter happy.
-var d3 = d3;
-var Circle = Circle;
-var svg = svg;
-// End of linter.
-
 var numParticles = 0.5;
 var createParticles, updateParticles, getParticles, newParticles, root, updateRoot;
 
