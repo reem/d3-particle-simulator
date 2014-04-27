@@ -16,10 +16,10 @@ var newParticles = newParticles;
 var numParticles = numParticles;
 // End of linter.
 
-var gravityStrength = 0.1;
-var chargeStrength = 0.2;
+var gravityStrength = 0.2;
+var chargeStrength = 0.4;
 var chargeFunction = function (d, i) {
-  return i ? (Math.random() - 0.8) * chargeStrength * 200 : -4000;
+  return i ? (Math.random() - 0.8) * chargeStrength * 100 : -4000;
 };
 
 var svg = d3.select("#main").append("svg:svg")
@@ -56,11 +56,11 @@ $(document).ready(function () {
   });
 
   setInterval(function () {
-    gravityStrength = gravitySlider.getValue()[0] * 5 + 0.00001;
+    gravityStrength = gravitySlider.getValue()[0] * 2.5 + 0.00001;
     chargeStrength = chargeSlider.getValue()[0] * 10;
 
     var oldParticles = numParticles;
-    numParticles = Math.floor(particleSlider.getValue()[0] * 2000);
+    numParticles = particleSlider.getValue()[0] * 2000;
 
     newParticles(oldParticles, numParticles);
     updateForce(getParticles(), gravityStrength, chargeFunction);
