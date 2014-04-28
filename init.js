@@ -49,7 +49,7 @@ $(document).ready(function () {
 
   // Our global event loop.
   // Could be refactored to use window.requestAnimationFrame.
-  setInterval(function () {
+  d3.timer(function () {
     // Set the strength of gravity and charge by getting them from
     // the slider.
     gravityStrength = gravitySlider.getValue()[0] * 2.5 + 0.00001;
@@ -64,5 +64,5 @@ $(document).ready(function () {
 
     // Reset the force's alpha.
     resetForce();
-  }, 100);
+  }, 200);
 });
